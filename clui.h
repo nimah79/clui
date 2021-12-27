@@ -334,10 +334,10 @@ int get_cursor_x()
     flush();
     int x = 0;
 #if OS_UNIX
-    system("echo -ne \"\\033[6n\";\
+    execl("sh", "sh", "-c", "echo -ne \"\\033[6n\";\
             read -s -d\\[ garbage;\
             read -s -d R cursor_loc;\
-            echo $cursor_loc > /tmp/cursor_pos");
+            echo $cursor_loc > /tmp/cursor_pos", NULL);
     FILE* fp = fopen("/tmp/cursor_pos", "r");
     if (!fp) {
         return 0;
@@ -363,10 +363,10 @@ int get_cursor_y()
     flush();
     int y = 0;
 #if OS_UNIX
-    system("echo -ne \"\\033[6n\";\
+    execl("sh", "sh", "-c", "echo -ne \"\\033[6n\";\
             read -s -d\\[ garbage;\
             read -s -d R cursor_loc;\
-            echo $cursor_loc > /tmp/cursor_pos");
+            echo $cursor_loc > /tmp/cursor_pos", NULL);
     FILE* fp = fopen("/tmp/cursor_pos", "r");
     if (!fp) {
         return 0;
